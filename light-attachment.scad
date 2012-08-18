@@ -22,16 +22,16 @@ module hole(r, h, rota, rotv, position) {
 thickness = 2;
 rackPlateWidth = 20;
 rackPlateLength = 21;
-rackPlate2HolePos = 6;
-rackScrewHoleRadius = 2;
-rackScrewWellDepth = 2;
+rackPlate2HolePos = 5;
+rackScrewHoleRadius = 2.5;
+rackScrewWellDepth = 4;
 wedgeDepth = 20;
 overhangHeight = 8;
 overhangDepth = 8;
 rackBarRadius = 4;
 lightPlateWidth = 20;
 lightPlateLength = 50;
-lightScrewHoleRadius = 2.5;
+lightScrewHoleRadius = 3;
 lightScrewWellDepth = 0;
 
 module rackPlate() {
