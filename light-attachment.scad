@@ -1,14 +1,11 @@
-module wedge(dx, dy, dz) {
-	polyhedron(
-		points = [[0,0,0],[dx,0,0],[dx,dy,0],[0,dy,0],[0,0,dz],[dx,0,dz]],
-		triangles = [
-			[0,1,3],[1,2,3], // bottom
-			[4,1,0],[1,4,5], // vertical
-			[5,3,2],[5,4,3], // slope
-			[1,5,2], // right side
-			[0,3,4]  // left side
-		]
-	);
+module wedge(thickness, depth, height) {
+	rotate(a=90, v=[0,1,0]) {
+		linear_extrude(height=thickness) {
+			polygon(
+				points = [[0,0],[-height,0],[0,depth]]
+			);
+		}
+	}
 }
 
 module hole(r, h, rota, rotv, position) {
@@ -19,7 +16,9 @@ module hole(r, h, rota, rotv, position) {
 	}
 }
 
+// Overall thickness
 thickness = 2;
+// Rack plate parameters
 rackPlateWidth = 20;
 rackPlateLength = 21;
 rackPlate2HolePos = 5;
@@ -29,6 +28,7 @@ wedgeDepth = 20;
 overhangHeight = 8;
 overhangDepth = 8;
 rackBarRadius = 4;
+// Light plate parameters
 lightPlateWidth = 20;
 lightPlateLength = 50;
 lightScrewHoleRadius = 3;
@@ -66,11 +66,6 @@ module connector() {
 			translate([-rackPlateWidth / 2, -overhangDepth, 0]) {
 				wedge(thickness, wedgeDepth, overhangHeight + lightPlateWidth);
 			}
-			/*translate([0, 2*thickness, overhangHeight/2]) {
-				rotate(a=90, v=[0,1,0]) {
-					cylinder(r=thickness*2, h=rackPlateWidth, center=true);
-				}
-			}*/
 		}
 		translate([-(rackPlateWidth+2)/2,-(overhangDepth+1),-1]) {
 			cube([rackPlateWidth+2, overhangDepth+1, overhangHeight-rackBarRadius+1]);
@@ -125,3 +120,4 @@ union() {
 	connector();
 	lightPlate();
 }
+
